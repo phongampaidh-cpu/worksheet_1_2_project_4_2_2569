@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="th">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ใบงานที่ 1.2 ข้อตกลงทีม</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+<style>
+/* Layout: one worksheet sheet on a cool paper ground; six parts stack, sign-off and submit close the sheet */
+:root{
+  --paper:#EEF2F7; --sheet:#FFFFFF; --ink:#1F2A44; --muted:#56627A; --line:#D3DBE6;
+  --field:#F8FAFC; --accent:#C2541A; --accent-soft:#FCE9DA; --focus:#2E6FB7; --ok:#2B7A57; --ok-soft:#E3F3EA; --warn:#A33B2B;
+  --f-display:'Prompt', Tahoma, sans-serif; --f-body:'Sarabun', Tahoma, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1522; --sheet:#182133; --ink:#E8EDF5; --muted:#A4AFC3; --line:#2D3A52;
+  --field:#121A29; --accent:#F0955A; --accent-soft:#3A271B; --focus:#86B6EE; --ok:#6CC69C; --ok-soft:#173326; --warn:#F08A7A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1522; --sheet:#182133; --ink:#E8EDF5; --muted:#A4AFC3; --line:#2D3A52;
+  --field:#121A29; --accent:#F0955A; --accent-soft:#3A271B; --focus:#86B6EE; --ok:#6CC69C; --ok-soft:#173326; --warn:#F08A7A; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:24px 48px}
+.sheet{max-width:880px;margin-inline:auto;background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.3;text-wrap:balance;margin:0}
+h1{font-size:clamp(26px,4.5vw,34px)}
+h2{font-size:22px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h2 .tag{font-size:14px;letter-spacing:.06em;color:var(--accent);font-weight:600;white-space:nowrap}
+h3{font-size:17px}
+p{margin:0}
+.meta{font-size:14px;letter-spacing:.04em;color:var(--muted)}
+.muted{color:var(--muted)}
+.hint{font-size:14px;color:var(--muted)}
+header{display:flex;flex-direction:column;gap:16px}
+.info{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px}
+@media (max-width:560px){.info{grid-template-columns:1fr 1fr}.info .wide{grid-column:1/-1}}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted);min-width:0}
+input[type=text],input[type=date],textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:64px}
+input:focus-visible,textarea:focus-visible,button:focus-visible,label.pick:focus-within,label.chk:focus-within{outline:2px solid var(--focus);outline-offset:2px}
+.goals{background:var(--accent-soft);border-radius:6px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.goals ul{margin:0;padding-left:20px}
+section.part{display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--ink);padding-top:20px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid var(--line);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card-head h3{font-size:16px}
+.role-grid{display:grid;grid-template-columns:2fr 0.7fr;gap:10px}
+@media (max-width:480px){.role-grid{grid-template-columns:1fr 1fr}.role-grid .full{grid-column:1/-1}}
+.role-grid .full{grid-column:1/-1}
+.pair{display:grid;grid-template-columns:1fr 2fr;gap:10px}
+@media (max-width:480px){.pair{grid-template-columns:1fr}}
+.checks{display:flex;gap:8px;flex-wrap:wrap}
+label.chk{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border:1px solid var(--line);border-radius:99px;font-size:14px;cursor:pointer}
+label.chk input{accent-color:var(--accent)}
+label.chk:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
+.badge{font-family:var(--f-display);font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}
+.badge.no{background:var(--field);color:var(--muted);border:1px solid var(--line)}
+.picks{display:flex;flex-direction:column;gap:6px}
+label.pick{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+label.pick:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
+label.pick input{accent-color:var(--accent);margin-top:6px}
+.step{display:grid;grid-template-columns:40px 1fr 0.8fr;gap:10px;align-items:start}
+.step .n{font-family:var(--f-display);font-weight:700;font-size:20px;color:var(--accent);padding-top:6px}
+@media (max-width:560px){.step{grid-template-columns:32px 1fr}.step .who{grid-column:2}}
+.fixed{background:var(--field);border:1px dashed var(--line);border-radius:6px;padding:8px 10px}
+.agree{display:flex;flex-direction:column;gap:8px}
+.agree label{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.agree label:has(input:checked){background:var(--ok-soft);border-color:var(--ok)}
+.agree input{accent-color:var(--ok);width:18px;height:18px}
+.submit{background:var(--field);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.todo{margin:0;padding-left:22px;font-size:15px}
+.todo li.done{color:var(--ok);text-decoration:line-through}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+button{font:inherit;font-family:var(--f-display);font-weight:600;font-size:16px;border-radius:6px;padding:10px 18px;cursor:pointer;border:1px solid var(--line);background:var(--sheet);color:var(--ink)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
+:root[data-theme="dark"] button.primary{color:#1A1208}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.primary{color:#1A1208}}
+.linkbox{display:flex;flex-direction:column;gap:10px;border:2px solid var(--ok);background:var(--ok-soft);border-radius:6px;padding:16px}
+.linkbox textarea{font-size:13px;min-height:84px;word-break:break-all;background:var(--sheet)}
+.linkbox ol{margin:0;padding-left:22px}
+.err{color:var(--warn);font-size:15px}
+.banner{max-width:880px;margin:0 auto 16px;background:var(--ok-soft);border:2px solid var(--ok);border-radius:6px;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.banner b{font-family:var(--f-display)}
+body.review .submit, body.review .no-review{display:none}
+body.review input,body.review textarea{opacity:1;color:var(--ink);-webkit-text-fill-color:var(--ink)}
+body.review textarea{resize:none}
+</style>
+<body>
+
+<div class="banner" id="banner" hidden>
+  <div><b id="bName"></b><br><span class="muted" id="bMeta"></span></div>
+  <button type="button" id="exitReview">ทำใบงานของทีมฉันเอง</button>
+</div>
+
+<main class="sheet">
+  <header>
+    <p class="meta">รายวิชาโครงงาน ม.4 · หน่วยที่ 1 ปฐมบทโครงงานและทีมนวัตกร · สัปดาห์ที่ 2 · คะแนนเต็ม 2 คะแนน</p>
+    <h1>ใบงานที่ 1.2 ข้อตกลงทีม</h1>
+    <div class="info">
+      <label class="f">ชั้น<input type="text" id="cls" data-k="cls" placeholder="ม.4/"></label>
+      <label class="f">ทีมที่<input type="text" id="team" data-k="team" inputmode="numeric"></label>
+      <label class="f wide">วันที่<input type="date" id="date" data-k="date"></label>
+    </div>
+    <div class="goals">
+      <p><b>คำชี้แจง</b> ทำเป็นทีม 3–4 คน ใช้เครื่องเดียว ส่งทีมละ 1 ลิงก์ เขียนให้ครบทั้ง 6 ส่วน ทุกคนในทีมต้องเห็นด้วยกับทุกข้อ แล้วกดยอมรับข้อตกลงก่อนส่ง</p>
+      <ul>
+        <li>แบ่งบทบาทและหน้าที่ในทีมได้เหมาะสมกับความถนัดของสมาชิก</li>
+        <li>กำหนดกติกาการทำงานร่วมกันที่ชัดเจนและวัดได้</li>
+        <li>วางแนวทางตัดสินใจและแก้ปัญหาภายในทีมร่วมกันได้</li>
+      </ul>
+    </div>
+    <p class="hint no-review">คำตอบบันทึกไว้ในเครื่องนี้อัตโนมัติ ปิดหน้าแล้วกลับมาทำต่อได้ในเครื่องเดิม</p>
+  </header>
+
+  <section class="part" aria-labelledby="p1">
+    <h2 id="p1"><span class="tag">ส่วนที่ 1</span>ชื่อทีม</h2>
+    <label class="f">ชื่อทีม<input type="text" id="tname" data-k="tname"></label>
+    <label class="f">ชื่อนี้มีความหมายว่า<input type="text" id="tmean" data-k="tmean"></label>
+  </section>
+
+  <section class="part" aria-labelledby="p2">
+    <h2 id="p2"><span class="tag">ส่วนที่ 2</span>สมาชิกและบทบาท</h2>
+    <p class="muted">ทีม 3 คน: ให้ 1 คนรับ 2 บทบาท โดยพิมพ์ชื่อเดียวกันซ้ำ ให้ครบทั้ง 4 บทบาท</p>
+    <div class="stack" id="roles"></div>
+    <h3>สมาชิกแต่ละคนถนัดเรื่องอะไร ที่จะช่วยทีมได้</h3>
+    <div class="stack" id="strengths"></div>
+  </section>
+
+  <section class="part" aria-labelledby="p3">
+    <h2 id="p3"><span class="tag">ส่วนที่ 3</span>ช่องทางติดต่อและเวลานัดทำงาน</h2>
+    <label class="f">ช่องทางติดต่อหลัก (เช่น กลุ่มไลน์)<input type="text" id="ch" data-k="ch"></label>
+    <label class="f">ตอบข้อความในกลุ่มภายในกี่ชั่วโมง<input type="text" id="reply" data-k="reply"></label>
+    <label class="f">เวลานัดทำงานนอกคาบ (วัน เวลา สถานที่)<input type="text" id="meet" data-k="meet"></label>
+    <label class="f">ลิงก์โฟลเดอร์แฟ้มสะสมงานของทีม<input type="text" id="folder" data-k="folder" inputmode="url" placeholder="https://drive.google.com/..."></label>
+  </section>
+
+  <section class="part" aria-labelledby="p4">
+    <h2 id="p4"><span class="tag">ส่วนที่ 4</span>กติกาทีม 5 ข้อ</h2>
+    <p class="muted">กติกาที่ <b>วัดได้</b> คือถ้ามีคนทำผิด ทุกคนในทีมรู้ทันที เช่น เปลี่ยน “ตรงต่อเวลา” เป็น “ส่งงานส่วนของตัวเองก่อนกำหนดทีม 1 วัน” ติ๊กให้ครบทั้ง 3 ข้อ จึงนับว่าวัดได้</p>
+    <div class="stack" id="rules"></div>
+  </section>
+
+  <section class="part" aria-labelledby="p5">
+    <h2 id="p5"><span class="tag">ส่วนที่ 5</span>การตัดสินใจ</h2>
+    <p class="muted">เมื่อสมาชิกเห็นไม่ตรงกัน ทีมจะตัดสินใจอย่างไร (เลือก 1 ข้อ)</p>
+    <div class="picks" id="decide"></div>
+    <label class="f" id="otherWrap" hidden>วิธีอื่นของทีม<input type="text" id="dother" data-k="dother"></label>
+    <label class="f">ถ้าคะแนนเสียงเท่ากัน ทีมจะ<input type="text" id="tie" data-k="tie"></label>
+  </section>
+
+  <section class="part" aria-labelledby="p6">
+    <h2 id="p6"><span class="tag">ส่วนที่ 6</span>ถ้ามีคนไม่ทำงาน</h2>
+    <p class="muted">เขียนขั้นตอนที่ทีมจะทำ เรียงจากเบาไปหนัก ขั้นสุดท้ายคือแจ้งครูที่ปรึกษา</p>
+    <div class="stack">
+      <div class="step"><span class="n">1</span><label class="f">ทีมจะทำอะไร<input type="text" id="x1" data-k="x1"></label><label class="f who">ใครเป็นคนทำ<input type="text" id="x1w" data-k="x1w"></label></div>
+      <div class="step"><span class="n">2</span><label class="f">ทีมจะทำอะไร<input type="text" id="x2" data-k="x2"></label><label class="f who">ใครเป็นคนทำ<input type="text" id="x2w" data-k="x2w"></label></div>
+      <div class="step"><span class="n">3</span><div class="f"><span class="hint">ทีมจะทำอะไร</span><p class="fixed">แจ้งครูที่ปรึกษา พร้อมหลักฐาน (เช่น ข้อความในกลุ่ม Logbook)</p></div><div class="f who"><span class="hint">ใครเป็นคนทำ</span><p class="fixed">หัวหน้าโครงการ</p></div></div>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="p7">
+    <h2 id="p7"><span class="tag">ยืนยัน</span>สมาชิกยอมรับข้อตกลง</h2>
+    <p class="muted">ให้สมาชิกแต่ละคนอ่านทวนทั้งใบ แล้วกดยอมรับด้วยตัวเอง รายชื่อมาจากส่วนที่ 2</p>
+    <div class="agree" id="agree"></div>
+    <p class="hint" id="agreeEmpty">กรอกชื่อสมาชิกในส่วนที่ 2 ก่อน รายชื่อจะขึ้นที่นี่</p>
+  </section>
+
+  <section class="submit" aria-labelledby="ps">
+    <h2 id="ps">ส่งใบงาน</h2>
+    <ul class="todo" id="todo"></ul>
+    <div class="btns">
+      <button type="button" class="primary" id="makeLink">สร้างลิงก์ส่งงาน</button>
+      <button type="button" id="clearAll">ล้างคำตอบทั้งหมด</button>
+    </div>
+    <p class="err" id="err" hidden></p>
+    <div class="linkbox" id="linkbox" hidden>
+      <h3>ลิงก์ข้อตกลงทีมของคุณ</h3>
+      <textarea id="link" readonly aria-label="ลิงก์ใบงาน"></textarea>
+      <div class="btns"><button type="button" class="primary" id="copy">คัดลอกลิงก์</button></div>
+      <p class="hint" id="copyMsg" role="status"></p>
+      <ol>
+        <li>กด “คัดลอกลิงก์”</li>
+        <li>หัวหน้าโครงการเปิด Padlet ของห้อง แล้วสร้างโพสต์ใหม่</li>
+        <li>ตั้งหัวข้อเป็น ชั้น ทีมที่ และชื่อทีม แล้ววางลิงก์ในโพสต์</li>
+      </ol>
+      <p class="hint">ถ้าแก้ข้อตกลงหลังจากนี้ ต้องกดสร้างลิงก์ใหม่และส่งลิงก์ใหม่แทน</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var BASE = location.origin + location.pathname;
+  var DRAFT = 'ws12-draft-v1';
+  var PREFIX = 'w2-';
+
+  var roles = [['หัวหน้าโครงการ','วางแผน ติดตามงาน'],['ผู้ออกแบบ / สร้าง','ประดิษฐ์ เขียนโค้ด'],['ผู้บันทึกข้อมูล','Logbook ผลทดสอบ แฟ้มสะสมงาน'],['ผู้นำเสนอ','สไลด์ โปสเตอร์ พูดนำเสนอ']];
+  var decide = [['vote','ทุกคนเสนอความเห็นก่อน แล้วโหวตเสียงข้างมาก'],['talk','คุยกันจนทุกคนเห็นด้วย ถ้าไม่ได้ใน 15 นาที ให้โหวต'],['owner','เจ้าของบทบาทที่เกี่ยวข้องตัดสิน หลังฟังความเห็นทุกคน'],['other','วิธีอื่น']];
+  var checks = [['w','บอกว่าใครทำ'],['a','บอกว่าทำอะไร'],['t','บอกว่าเมื่อไหร่ / บ่อยแค่ไหน']];
+
+  function h(tag, attrs, html){var e=document.createElement(tag);for(var k in attrs){if(k==='dataK')e.dataset.k=attrs[k];else e.setAttribute(k,attrs[k]);}if(html!=null)e.innerHTML=html;return e;}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  var R=document.getElementById('roles');
+  roles.forEach(function(r,i){
+    var n=i+1, c=h('div',{class:'card'});
+    c.appendChild(h('div',{class:'card-head'},'<h3>'+r[0]+'</h3><span class="hint">'+r[1]+'</span>'));
+    var g=h('div',{class:'role-grid'});
+    g.innerHTML='<label class="f">ชื่อ-สกุล<input type="text" id="n'+n+'" data-k="n'+n+'"></label>'+
+      '<label class="f">เลขที่<input type="text" id="no'+n+'" data-k="no'+n+'" inputmode="numeric"></label>'+
+      '<label class="f full">หน้าที่หลักที่จะทำในทีมนี้<input type="text" id="d'+n+'" data-k="d'+n+'"></label>';
+    c.appendChild(g); R.appendChild(c);
+  });
+  var S=document.getElementById('strengths');
+  for(var i=1;i<=4;i++){
+    S.appendChild(h('div',{class:'pair'},'<label class="f">ชื่อเล่น<input type="text" id="sn'+i+'" data-k="sn'+i+'"></label><label class="f">สิ่งที่ถนัด<input type="text" id="ss'+i+'" data-k="ss'+i+'"></label>'));
+  }
+  var RU=document.getElementById('rules');
+  for(var j=1;j<=5;j++){
+    var c=h('div',{class:'card'});
+    c.innerHTML='<div class="card-head"><h3>กติกาข้อที่ '+j+'</h3><span class="badge no" id="b'+j+'">ยังวัดไม่ได้</span></div>'+
+      '<textarea id="r'+j+'" data-k="r'+j+'" rows="2" aria-label="กติกาข้อที่ '+j+'"></textarea>'+
+      '<div class="checks">'+checks.map(function(x){return '<label class="chk"><input type="checkbox" id="r'+j+x[0]+'" data-k="r'+j+x[0]+'">'+x[1]+'</label>';}).join('')+'</div>';
+    RU.appendChild(c);
+  }
+  var D=document.getElementById('decide');
+  decide.forEach(function(x){D.appendChild(h('label',{class:'pick'},'<input type="radio" name="dec" id="dec-'+x[0]+'" data-k="dec" value="'+x[0]+'"><span>'+x[1]+'</span>'));});
+
+  function fields(){return [].slice.call(document.querySelectorAll('[data-k]'));}
+  function collect(){var d={};fields().forEach(function(f){var k=f.dataset.k;if(f.type==='radio'){if(f.checked)d[k]=f.value;}else if(f.type==='checkbox'){if(f.checked)d[k]='1';}else if(f.value.trim())d[k]=f.value.trim();});return d;}
+  function setFields(d){fields().forEach(function(f){var k=f.dataset.k;if(f.type==='radio')f.checked=(d[k]===f.value);else if(f.type==='checkbox')f.checked=(d[k]==='1');else f.value=d[k]||'';});}
+
+  function members(d){var seen={},out=[];for(var i=1;i<=4;i++){var n=(d['n'+i]||'').trim();if(n&&!seen[n]){seen[n]=1;out.push({i:i,name:n});}}return out;}
+  function renderAgree(d){
+    var A=document.getElementById('agree'), m=members(d);
+    A.innerHTML='';
+    m.forEach(function(x){A.appendChild(h('label',{},'<input type="checkbox" id="ag'+x.i+'" data-k="ag'+x.i+'"'+(d['ag'+x.i]==='1'?' checked':'')+(reviewing?' disabled':'')+'><span>'+esc(x.name)+' อ่านข้อตกลงครบทุกส่วนแล้ว และยินดีทำตาม</span>'));});
+    document.getElementById('agreeEmpty').hidden=m.length>0;
+  }
+
+  function missing(d){
+    var m=members(d), out=[];
+    out.push(['ชั้น และทีมที่', d.cls&&d.team]);
+    out.push(['ชื่อทีม', d.tname]);
+    out.push(['ชื่อสมาชิกครบ 4 บทบาท (สมาชิก 3–4 คน)', [1,2,3,4].every(function(i){return d['n'+i];})&&m.length>=3]);
+    out.push(['ช่องทางติดต่อและเวลานัด', d.ch&&d.meet]);
+    var rc=0;for(var j=1;j<=5;j++)if(d['r'+j])rc++;
+    out.push(['กติกาทีม 5 ข้อ', rc===5]);
+    out.push(['วิธีตัดสินใจ', d.dec&&(d.dec!=='other'||d.dother)]);
+    out.push(['ขั้นตอนเมื่อมีคนไม่ทำงาน ขั้น 1–2', d.x1&&d.x2]);
+    out.push(['สมาชิกทุกคนกดยอมรับ', m.length>0&&m.every(function(x){return d['ag'+x.i]==='1';})]);
+    return out;
+  }
+
+  function update(){
+    var d=collect();
+    for(var j=1;j<=5;j++){var ok=d['r'+j]&&d['r'+j+'w']&&d['r'+j+'a']&&d['r'+j+'t'];var b=document.getElementById('b'+j);b.className='badge '+(ok?'ok':'no');b.textContent=ok?'วัดได้':'ยังวัดไม่ได้';}
+    document.getElementById('otherWrap').hidden=(d.dec!=='other');
+    var T=document.getElementById('todo');T.innerHTML='';
+    missing(d).forEach(function(x){T.appendChild(h('li',{class:x[1]?'done':''},x[0]));});
+    return d;
+  }
+
+  var A32='abcdefghijklmnopqrstuvwxyz234567';
+  function b32(bytes){var out='',bits=0,val=0;for(var i=0;i<bytes.length;i++){val=((val<<8)|bytes[i])&0xffff;bits+=8;while(bits>=5){out+=A32[(val>>>(bits-5))&31];bits-=5;}}if(bits>0)out+=A32[(val<<(5-bits))&31];return out;}
+  function unb32(s){var bytes=[],bits=0,val=0;for(var i=0;i<s.length;i++){var x=A32.indexOf(s[i]);if(x<0)throw new Error('bad');val=((val<<5)|x)&0xffff;bits+=5;if(bits>=8){bytes.push((val>>>(bits-8))&255);bits-=8;}}return new Uint8Array(bytes);}
+  function encode(d){return PREFIX+b32(LZString.compressToUint8Array(JSON.stringify({v:1,t:Date.now(),d:d})));}
+  function decode(code){var json=LZString.decompressFromUint8Array(unb32(code.slice(PREFIX.length)));var o=JSON.parse(json);if(!o||!o.d)throw new Error('empty');return o;}
+
+  function save(){try{localStorage.setItem(DRAFT,JSON.stringify(collect()));}catch(e){}}
+  function load(){try{var s=localStorage.getItem(DRAFT);return s?JSON.parse(s):{};}catch(e){return {};}}
+
+  var reviewing=false, timer;
+  function apply(d){setFields(d);renderAgree(d);update();}
+  function onEdit(e){
+    if(reviewing||!e.target.dataset||!e.target.dataset.k)return;
+    if(/^n\d$/.test(e.target.dataset.k))renderAgree(collect());
+    update();clearTimeout(timer);timer=setTimeout(save,300);
+    document.getElementById('linkbox').hidden=true;
+  }
+  document.addEventListener('input',onEdit);
+  document.addEventListener('change',onEdit);
+
+  function setReview(on,o){
+    reviewing=on;document.body.classList.toggle('review',on);
+    document.getElementById('banner').hidden=!on;
+    if(on){
+      var d=o.d;
+      document.getElementById('bName').textContent='ข้อตกลงทีม '+(d.tname||'(ไม่ระบุชื่อทีม)');
+      var when=new Date(o.t);
+      document.getElementById('bMeta').textContent='ชั้น '+(d.cls||'–')+' · ทีมที่ '+(d.team||'–')+' · สร้างลิงก์เมื่อ '+when.toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'})+' · ดูอย่างเดียว';
+      apply(d);
+    }
+    fields().forEach(function(f){f.disabled=on;});
+  }
+
+  function start(){
+    var hs=(location.hash||'').slice(1);
+    if(hs.indexOf(PREFIX)===0){
+      try{setReview(true,decode(hs));return;}
+      catch(e){setReview(false);apply(load());var er=document.getElementById('err');er.hidden=false;er.textContent='เปิดลิงก์ใบงานนี้ไม่ได้ ลิงก์อาจถูกตัดไม่ครบ ให้ทีมคัดลอกลิงก์ใหม่ทั้งหมด';return;}
+    }
+    setReview(false);
+    var d=load();
+    if(!d.date){var t=new Date();d.date=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
+    apply(d);
+  }
+  window.addEventListener('hashchange',start);
+  document.getElementById('exitReview').addEventListener('click',function(){location.hash='';start();window.scrollTo(0,0);});
+
+  document.getElementById('makeLink').addEventListener('click',function(){
+    var d=update(), er=document.getElementById('err');
+    var left=missing(d).filter(function(x){return !x[1];}).map(function(x){return x[0];});
+    if(left.length){er.hidden=false;er.textContent='ยังขาด: '+left.join(' · ')+' ทำให้ครบแล้วกดสร้างลิงก์อีกครั้ง';document.getElementById('linkbox').hidden=true;return;}
+    if(typeof LZString==='undefined'){er.hidden=false;er.textContent='หน้าเว็บยังโหลดไม่ครบ ลองรีเฟรชหน้าแล้วกดอีกครั้ง (คำตอบยังอยู่)';return;}
+    er.hidden=true;
+    document.getElementById('link').value=BASE+'#'+encode(d);
+    document.getElementById('copyMsg').textContent='';
+    var lb=document.getElementById('linkbox');lb.hidden=false;lb.scrollIntoView({block:'nearest'});
+  });
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=document.getElementById('link'),msg=document.getElementById('copyMsg');
+    function fallback(){t.focus();t.select();msg.textContent='คัดลอกอัตโนมัติไม่ได้ ลิงก์ถูกเลือกไว้แล้ว กด Ctrl+C หรือแตะค้างแล้วเลือก คัดลอก';}
+    try{navigator.clipboard.writeText(t.value).then(function(){msg.textContent='คัดลอกลิงก์แล้ว นำไปวางใน Padlet ได้เลย';},fallback);}catch(e){fallback();}
+  });
+  var armed=false,armT;
+  document.getElementById('clearAll').addEventListener('click',function(){
+    var b=this;
+    if(!armed){armed=true;b.textContent='กดอีกครั้งเพื่อยืนยันการล้าง';armT=setTimeout(function(){armed=false;b.textContent='ล้างคำตอบทั้งหมด';},4000);return;}
+    clearTimeout(armT);armed=false;b.textContent='ล้างคำตอบทั้งหมด';apply({});save();document.getElementById('linkbox').hidden=true;
+  });
+
+  start();
+})();
+</script>
+</body>
+</html>
